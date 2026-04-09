@@ -1,0 +1,2 @@
+import fitz
+print("OK")
