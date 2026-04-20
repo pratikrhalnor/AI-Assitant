@@ -19,11 +19,18 @@ class RAGSearch:
         sources = []
 
         for res in results:
-            context_blocks.append(res["text"])
+            # SAFE extraction
+            text = res.get("text", "")
+            page = res.get("page", "N/A")
+
+            if not isinstance(text, str):
+                text = str(text)
+
+            context_blocks.append(text)
 
             sources.append({
-                "page": res["page"],
-                "text": res["text"][:300]
+                "page": page,
+                "text": text[:300]
             })
 
         context = "\n\n".join(context_blocks)
@@ -31,9 +38,10 @@ class RAGSearch:
         prompt = f"""
 You are a helpful AI assistant.
 
-First briefly explain your reasoning, then answer.
+Answer clearly using the given context.
 
-Question: {query}
+Question:
+{query}
 
 Context:
 {context}

@@ -3,15 +3,21 @@ class VectorStore:
         self.texts = []
 
     def build(self, texts, embedding_model):
-        # store text + page info
-        self.texts = [{"text": t, "page": i+1} for i, t in enumerate(texts)]
+        self.texts = texts
 
     def search(self, query, top_k=3):
         query_words = query.lower().split()
         scored = []
 
         for item in self.texts:
-            text_lower = item["text"].lower()
+
+            # 🔥 SAFE TEXT EXTRACTION
+            text = item.get("text", "")
+
+            if not isinstance(text, str):
+                text = str(text)
+
+            text_lower = text.lower()
 
             score = sum(1 for word in query_words if word in text_lower)
 
