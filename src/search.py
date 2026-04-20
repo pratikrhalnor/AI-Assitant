@@ -19,7 +19,6 @@ class RAGSearch:
         sources = []
 
         for res in results:
-            # SAFE extraction
             text = res.get("text", "")
             page = res.get("page", "N/A")
 
@@ -36,9 +35,7 @@ class RAGSearch:
         context = "\n\n".join(context_blocks)
 
         prompt = f"""
-You are a helpful AI assistant.
-
-Answer clearly using the given context.
+Answer the question using the context below.
 
 Question:
 {query}

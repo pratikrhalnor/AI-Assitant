@@ -1,44 +1,16 @@
 import streamlit as st
 import tempfile
-import streamlit.components.v1 as components
 
 from src.data_loader import PDFLoader
 from src.embedding import EmbeddingModel
 from src.vectorstore import VectorStore
 from src.search import RAGSearch
-from src.diagram import extract_steps, steps_to_mermaid
 
+st.set_page_config(page_title="Lightweight RAG", layout="wide")
 
-# =========================
-# MERMAID RENDER
-# =========================
-def render_mermaid(diagram_code):
-    html = f"""
-    <html>
-    <body>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>
-        mermaid.initialize({{startOnLoad:true}});
-    </script>
-    <div class="mermaid">
-    {diagram_code}
-    </div>
-    </body>
-    </html>
-    """
-    components.html(html, height=450)
+st.title("📄 Lightweight RAG (CPU Only)")
 
-
-# =========================
-# PAGE CONFIG
-# =========================
-st.set_page_config(page_title="AI Assistant", layout="wide")
-
-st.title("🤖 Chat with your PDF")
-
-# =========================
-# SESSION STATE
-# =========================
+# ================= STATE =================
 if "chat" not in st.session_state:
     st.session_state.chat = []
 
@@ -49,11 +21,9 @@ if "rag" not in st.session_state:
     st.session_state.rag = None
 
 
-# =========================
-# SIDEBAR (UPLOAD)
-# =========================
+# ================= SIDEBAR =================
 with st.sidebar:
-    st.header("📂 Upload PDF")
+    st.header("Upload PDF")
 
     uploaded_files = st.file_uploader(
         "Upload files",
@@ -64,24 +34,14 @@ with st.sidebar:
     if uploaded_files:
         st.session_state.files = uploaded_files
 
-    st.markdown("### Files")
-
-    if st.session_state.files:
-        for f in st.session_state.files:
-            st.write(f"📄 {f.name}")
-    else:
-        st.write("No files uploaded")
-
     if st.button("Clear Files"):
         st.session_state.files = []
         st.session_state.rag = None
 
 
-# =========================
-# BUILD RAG
-# =========================
+# ================= BUILD =================
 if st.session_state.files and st.session_state.rag is None:
-    with st.spinner("Processing PDF..."):
+    with st.spinner("Processing PDFs..."):
 
         texts = []
 
@@ -110,48 +70,26 @@ if st.session_state.files and st.session_state.rag is None:
 
         st.session_state.rag = RAGSearch(store)
 
-    st.success("✅ PDF Ready")
+    st.success("PDF Ready")
 
 
-# =========================
-# DISPLAY CHAT
-# =========================
-for i, msg in enumerate(st.session_state.chat):
+# ================= CHAT =================
+for msg in st.session_state.chat:
     with st.chat_message(msg["role"]):
         st.write(msg["content"])
 
-        # SHOW SOURCES
         if "sources" in msg:
-            with st.expander("🔽 Sources"):
+            with st.expander("Sources"):
                 for src in msg["sources"]:
-                    st.markdown(f"**Page {src['page']}**")
+                    st.markdown(f"Page {src['page']}")
                     st.write(src["text"])
 
-        # DIAGRAM BUTTON (ONLY ON CLICK)
-        if "sources" in msg:
-            if st.button("📊 Generate Diagram", key=f"btn_{i}"):
 
-                combined_text = " ".join([s["text"] for s in msg["sources"]])
-
-                steps = extract_steps(combined_text)
-                diagram_code = steps_to_mermaid(steps)
-
-                if diagram_code:
-                    render_mermaid(diagram_code)
-                else:
-                    st.info("No step-based content found for diagram.")
-
-
-# =========================
-# INPUT
-# =========================
+# ================= INPUT =================
 query = st.chat_input("Ask something...")
 
 if query:
-    st.session_state.chat.append({
-        "role": "user",
-        "content": query
-    })
+    st.session_state.chat.append({"role": "user", "content": query})
 
     with st.chat_message("user"):
         st.write(query)

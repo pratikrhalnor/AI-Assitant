@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RAG Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-inner">
+
+            <div class="app-brand">
+                <div class="app-title">RAG Assistant</div>
+                <div class="app-subtitle">Upload PDF and ask questions</div>
+            </div>
+
+            <!-- Upload -->
+            <div class="upload-section">
+                <div class="drop-zone" id="dropZone">
+                    <div class="drop-zone-content">
+                        <div class="upload-icon">📂</div>
+                        <div class="drop-text">Drag & drop PDF</div>
+                        <button class="btn-outline" id="browseFileBtn">Browse</button>
+                    </div>
+                </div>
+
+                <input type="file" id="fileInput" hidden accept=".pdf" multiple>
+            </div>
+
+            <!-- File list -->
+            <div class="file-list-container">
+                <div class="file-list-header">
+                    <span>Files</span>
+                    <span id="fileCountBadge">0</span>
+                </div>
+
+                <ul id="fileList" class="file-list">
+                    <li class="empty-file-message">No files uploaded yet</li>
+                </ul>
+            </div>
+
+            <button id="clearFilesBtn" class="btn-secondary">Clear Files</button>
+
+        </div>
+    </aside>
+
+    <!-- CHAT -->
+    <main class="chat-main">
+
+        <div class="chat-header">
+            <div class="ai-name">🤖 AI Assistant</div>
+        </div>
+
+        <div class="chat-messages-container">
+            <div id="chatMessages" class="chat-messages"></div>
+        </div>
+
+        <div class="chat-input-area">
+            <div class="input-wrapper">
+                <textarea id="chatInput" class="chat-textarea" placeholder="Ask something..."></textarea>
+                <button id="sendButton" class="send-btn">➤</button>
+            </div>
+        </div>
+
+    </main>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
