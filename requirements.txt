@@ -5,3 +5,22 @@ scikit-learn
 numpy==1.23.5
 langchain-groq
 python-dotenv
+# Core Backend
+fastapi
+uvicorn
+
+# PDF Processing
+pymupdf
+pytesseract
+pillow
+
+# Data & ML
+numpy==1.23.5
+scikit-learn
+
+# LLM Integration
+langchain
+langchain-groq
+
+# Environment
+python-dotenv
