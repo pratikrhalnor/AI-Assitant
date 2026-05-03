@@ -1,67 +1,30 @@
-# Lightweight RAG System
+# Lightweight RAG System for CPU-Only Document Question Answering
 
-## Project Overview
-This project implements a Lightweight Retrieval-Augmented Generation (RAG) system designed to enhance the capabilities of traditional language models by integrating retrieval mechanisms. The system is intended for various natural language processing tasks such as question answering, summarization, and more. 
+## Overview
+This project implements a lightweight Retrieval-Augmented Generation (RAG) system designed specifically for CPU-only environments, making it accessible for users without high-performance hardware. The system allows users to perform document-based question answering efficiently.
 
 ## Features
-- **Retrieval-Augmented Capabilities**: Combines generative and retrieval approaches to provide more accurate outputs.
-- **Lightweight**: Optimized for speed and efficiency, making it suitable for real-time applications.
-- **Modular Architecture**: Each component can be easily updated or replaced.
-- **User-Friendly Interface**: Simplifies interactions with the system through easy-to-use APIs. 
+- **CPU Optimization:** Tailored for efficient execution on standard CPUs, ensuring that users can run the system without requiring GPU resources.
+- **Easy Setup:** Simple installation and deployment process to help beginners get started quickly.
+- **Flexible Document Handling:** Supports various document formats and allows for smooth retrieval and generation of answers from large datasets.
 
-## Architecture
-The architecture of the Lightweight RAG system consists of the following major components:
-1. **Retrieval Module**: Fetches relevant documents based on user queries.
-2. **Generation Module**: Generates responses based on retrieved documents and queries.
-3. **Integration Layer**: Coordinates the interaction between retrieval and generation components.
-4. **User Interface**: Provides endpoints for user interaction. 
-
-![Architecture Diagram](link_to_architecture_diagram)
-
-## Installation
-To install the Lightweight RAG System, follow these steps:
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/pratikrhalnor/AI-Assitant.git
-   cd AI-Assitant
-   ```
-2. Install the required dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-## Environment Setup
-Ensure that you have Python 3.x installed. It is recommended to create a virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Linux/macOS
-venv\Scripts\activate  # On Windows
-```
+## Getting Started
+To set up the Lightweight RAG System, follow these steps:
+1. Ensure you have Python 3.x installed on your machine.
+2. Clone this repository.
+3. Install the required dependencies using `pip install -r requirements.txt`.
+4. Run the main script to start using the question answering system.
 
 ## Usage
-To use the Lightweight RAG System, start the application by running:
-```bash
-python app.py
-```
-Then, you can interact with the system through the API or the command line interface.
+After setup, you can use the system by providing a document and a question. The RAG model retrieves relevant information from the document to generate accurate answers.
 
-## Screenshots
-![Screenshot](link_to_screenshot_1)
-![Screenshot](link_to_screenshot_2)
+For detailed examples and API documentation, please refer to the Wiki section of this repository.
 
-## Example Queries
-1. What is the weather like today?
-2. Tell me about the latest advancements in AI.
-3. How do I set up a virtual environment in Python?
-
-## Limitations
-- **Limited Knowledge Base**: The quality of responses is dependent on the retrieval module's document base.
-- **Performance on Long Queries**: The model may struggle with overly complex or lengthy queries.
-
-## Future Improvements
-- **Enhanced Retrieval Strategies**: Investigate advanced methods for document retrieval.
-- **Broader Knowledge Base Integration**: Incorporate more diverse datasets to improve response accuracy.
-- **User Personalization Features**: Develop ways to personalize responses based on user behavior.
+## Contributing
+We welcome contributions! Please read the contributing guidelines for more information on how to get involved.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact
+For any questions, feel free to reach out to the project maintainer at pratikrhalnor@example.com.
